@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-web
+  labels:
+    customer: djg
+spec:
+  selector:
+    matchLabels:
+      app: web
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - image: amitraikkr/djg-web:0.4
+        name: web-ctr
+        ports:
+        - containerPort: 8000
